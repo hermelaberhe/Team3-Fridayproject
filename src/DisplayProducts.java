@@ -8,9 +8,10 @@ import java.util.Scanner;
 
 public class DisplayProducts {
 
-   static ArrayList<src.Products> arrProducts = new ArrayList<>();
+    static ArrayList<src.Products> arrProducts = new ArrayList<>();
 
     public static void loadProducts() throws FileNotFoundException {
+        arrProducts.clear();
         Scanner fileScanner = new Scanner(new File("Product.csv"));
         if (fileScanner.hasNextLine()) {
             fileScanner.nextLine();  // Skips the header line
@@ -32,8 +33,26 @@ public class DisplayProducts {
         }
     }
 
+    public static void searchProducts(String keyword) {
+        boolean found = false;
+        // Debugging output
 
-    public static void main(String[] args) throws FileNotFoundException {
+        // Go through each product and check if the keyword is found in any of the fields
+        for (Products product : arrProducts) {
+            if (product.getSku().toLowerCase().contains(keyword.toLowerCase()) ||
+                    product.getName().toLowerCase().contains(keyword.toLowerCase()) ||
+                    product.getDepartment().toLowerCase().contains(keyword.toLowerCase())) {
+                System.out.println("Found: " + product); // Debugging output
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No products found matching your search.");
+        }
+    }
+
+    public static void displayProducts() throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
 
         boolean running = true;
@@ -51,8 +70,9 @@ public class DisplayProducts {
             scanner.nextLine();
             switch (choice) {
                 case 1:
-
-
+                    System.out.print("Enter a keyword to search: ");
+                    String keyword = scanner.nextLine();
+                    searchProducts(keyword);
                     break;
                 case 2:
 //
