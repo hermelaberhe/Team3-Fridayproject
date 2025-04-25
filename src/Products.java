@@ -13,9 +13,23 @@ public class Products {
         this.department = department;
     }
 
+    public String getSku() {
+        return sku;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
     @Override
     public String toString() {
-        return String.format("%s | %s | $%.2f | %s", sku, name, price, department);
+        return String.format("%s  %s  $%.2f %s", sku, name, price, department);
     }
 }
